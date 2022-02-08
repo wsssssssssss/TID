@@ -1,0 +1,31 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: TID
+on:
+  schedule:
+    - cron: 00 07 * * *
+
+jobs:
+  create_issue:
+    name: Create TID issue
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Get current date
+        id: date
+        run: echo "CURRENT_DATE=$(date +%Y%m%d%H%M)" >> $GITHUB_ENV
+      - name: Create TID issue
+        uses: imjohnbo/issue-bot@3daae12aa54d38685d7ff8459fc8a2aee8cea98b
+        with:
+          assignees: "kimjuneseo, wnsdnn, yeongyu05, youngjoon568, pyjun01"
+          labels: ""
+          title: ${{ env.CURRENT_DATE }}
+          body: ""
+          pinned: false
+          close-previous: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
