@@ -6,7 +6,8 @@
 name: TID
 on:
   schedule:
-    - cron: 00 07 * * *
+    - cron: 0 0 * * *
+  workflow_dispatch:
 
 jobs:
   create_issue:
