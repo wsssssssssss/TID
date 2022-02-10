@@ -1,0 +1,22 @@
+name: TID
+
+on:
+  schedule:
+    - cron: 0 0 * * *
+  workflow_dispatch:
+
+jobs:
+  create_issue:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v2
+      - uses: zcong1993/setup-timezone@master
+        with:
+          timezone: Asia/Seoul
+      - name: npm install, build, and test
+        env:
+          TOKEN: ${{ secrets.TOKEN }}
+        run: |
+          npm install
+          npm run start
